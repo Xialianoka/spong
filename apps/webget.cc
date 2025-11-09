@@ -13,9 +13,13 @@ void get_URL(const string &host, const string &path) {
     socket.connect(addr);
     socket.write("GET " + path + " HTTP/1.1\r\nHost: " + host + "\r\n\r\n");
     socket.shutdown(SHUT_WR);
+    string buffer;
+    socket.read(buffer);
     while (!socket.eof()) {
-        cout << socket.read();
+        buffer.append(socket.read());
     }
+    cout << buffer;
+
     socket.close();
     // You will need to connect to the "http" service on
     // the computer whose name is in the "host" string,
