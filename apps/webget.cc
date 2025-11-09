@@ -13,12 +13,9 @@ void get_URL(const string &host, const string &path) {
     socket.connect(addr);
     socket.write("GET " + path + " HTTP/1.1\r\nHost: " + host + "\r\n\r\n");
     socket.shutdown(SHUT_WR);
-    string buffer;
-    socket.read(buffer);
     while (!socket.eof()) {
-        buffer.append(socket.read());
+        cout << socket.read();
     }
-    cout << buffer;
 
     socket.close();
     // You will need to connect to the "http" service on
@@ -31,6 +28,7 @@ void get_URL(const string &host, const string &path) {
 
     // cerr << "Function called: get_URL(" << host << ", " << path << ").\n";
     // cerr << "Warning: get_URL() has not been implemented yet.\n";
+    return;
 }
 
 int main(int argc, char *argv[]) {
