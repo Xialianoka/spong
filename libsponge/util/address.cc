@@ -7,6 +7,7 @@
 #include <memory>
 #include <netdb.h>
 #include <stdexcept>
+#include <array>
 #include <system_error>
 
 using namespace std;
