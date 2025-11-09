@@ -7,6 +7,7 @@
 #include <list>
 #include <string>
 #include <utility>
+#include <vector>
 
 //! \brief An in-order byte stream.
 
@@ -16,7 +17,11 @@
 class ByteStream {
   private:
     // Your code here -- add private members as necessary.
-
+    std::vector<char> _buffer;
+    size_t _capacity;
+    size_t _read_count;
+    size_t _write_count;
+    bool _input_ended_flag;
     bool _error{};  //!< Flag indicating that the stream suffered an error.
 
   public:
