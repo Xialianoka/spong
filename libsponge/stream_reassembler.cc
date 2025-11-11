@@ -7,9 +7,6 @@
 
 // You will need to add private members to the class declaration in `stream_reassembler.hh`
 
-template <typename... Targs>
-void DUMMY_CODE(Targs &&.../* unused */) {}
-
 using namespace std;
 
 size_t StreamReassembler::first_unread() { return _output.bytes_read(); }

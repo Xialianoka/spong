@@ -23,17 +23,16 @@ class StreamReassembler {
     ByteStream _output;  //!< The reassembled in-order byte stream
     size_t _capacity;    //!< The maximum number of bytes
 
-    size_t first_unread();
-
-    size_t first_unacceptable();
-
-    size_t first_unassembled();
-
     size_t available_capacity();
 
     long merge_data(buffer_node &elem1, const buffer_node &elem2);
 
   public:
+    size_t first_unread();
+
+    size_t first_unacceptable();
+
+    size_t first_unassembled();
     //! \brief Construct a `StreamReassembler` that will store up to `capacity` bytes.
     //! \note This capacity limits both the bytes that have been reassembled,
     //! and those that have not yet been reassembled.
