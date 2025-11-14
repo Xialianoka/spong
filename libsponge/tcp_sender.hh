@@ -32,6 +32,20 @@ class TCPSender {
     //! the (absolute) sequence number for the next byte to be sent
     uint64_t _next_seqno{0};
 
+    std::queue<TCPSegment> _segments_outstanding{};
+    size_t _bytes_in_flight = 0;
+    size_t _recvd_ackno = 0;
+    bool _sync_flag = false;
+    bool _fin_flag = false;
+    size_t _windows_size = 0;
+
+    size_t _timer = 0;
+    bool _is_timer_running = false;
+    size_t _retransmission_timeout = 0;
+    size_t _retransmission_count = 0;
+
+    void send_message(TCPSegment &seg);
+
   public:
     //! Initialize a TCPSender
     TCPSender(const size_t capacity = TCPConfig::DEFAULT_CAPACITY,
@@ -54,7 +68,7 @@ class TCPSender {
     void send_empty_segment();
 
     //! \brief create and send segments to fill as much of the window as possible
-    void fill_window();
+    void fill_window(bool send_syn = true);
 
     //! \brief Notifies the TCPSender of the passage of time
     void tick(const size_t ms_since_last_tick);
