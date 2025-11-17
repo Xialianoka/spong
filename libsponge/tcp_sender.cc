@@ -40,7 +40,7 @@ void TCPSender::fill_window(bool send_syn) {
     // =0时设为1为了能够发送探测包
     size_t win = _windows_size > 0 ? _windows_size : 1;
     size_t remain;
-    while ((remain = win - (_next_seqno - _recvd_ackno)) != 0 && !_fin_flag) {
+    while ((remain = win - (_next_seqno - _recvd_ackno)) > 0 && !_fin_flag) {
         size_t size = min(TCPConfig::MAX_PAYLOAD_SIZE, remain);
         TCPSegment seg;
         string str = _stream.read(size);
